@@ -20,10 +20,11 @@ Um formulário interativo, dinâmico e moderno construído para dar voz aos cola
 O projeto foi refatorado e modularizado para garantir máxima organização e facilidade de manutenção:
 
 ```text
-voz-do-colaborador/
+vozColaborador/ (raiz do repositório)
 ├── index.html   # Estrutura e marcação semântica do formulário
 ├── style.css    # Estilos CSS, variáveis de design system e animações
-└── script.js    # Lógica de validação, rascunhos e envio para API externa
+├── script.js    # Lógica de validação, rascunhos e envio para API externa
+└── README.md    # Documentação geral do projeto
 ```
 
 ---
@@ -32,7 +33,7 @@ voz-do-colaborador/
 
 Usamos o **FormSubmit.co** (um serviço gratuito e rápido para envio de dados de páginas estáticas por e-mail).
 
-1. **Configuração:** O e-mail de destino está configurado na constante no início do arquivo `voz-do-colaborador/script.js`:
+1. **Configuração:** O e-mail de destino está configurado na constante no início do arquivo `script.js`:
    ```javascript
    const EMAIL_DESTINO = "angelo.riosaude@gmail.com";
    ```
@@ -53,7 +54,7 @@ Como o projeto é feito puramente de tecnologias estáticas do ecossistema Web (
    ```
 2. Acesse a pasta do projeto:
    ```bash
-   cd ideias/voz-do-colaborador
+   cd ideias
    ```
 3. Dê dois cliques no arquivo `index.html` ou abra-o em qualquer navegador de sua preferência (Chrome, Edge, Firefox, Safari).
 4. *(Opcional)* Se preferir rodar usando um servidor local rápido com o VS Code, você pode usar a extensão **Live Server** para obter recarregamento em tempo real (Hot Reload).
