@@ -1,3 +1,5 @@
+const EMAIL_DESTINO = "angelo.riosaude@gmail.com";
+
 let currentSection = 1;
 const totalSections = 4;
 
@@ -74,14 +76,60 @@ function countChars(el, countId) {
   document.getElementById(countId).textContent = el.value.length + ' caracteres';
 }
 
-function submitForm() {
+async function submitForm() {
   if (!validate(4)) return;
-  document.getElementById('sec4').classList.remove('active');
-  document.getElementById('progressFill').style.width = '100%';
-  document.getElementById('progressText').textContent = '✅ Concluído!';
-  document.getElementById('successScreen').classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  localStorage.removeItem('formVozDraft');
+
+  const btnSubmit = document.querySelector('.btn-submit');
+  const originalText = btnSubmit.innerHTML;
+
+  // Desabilitar o botão e mostrar carregamento
+  btnSubmit.disabled = true;
+  btnSubmit.innerHTML = '⏳ Enviando sua voz...';
+
+  // Obter todos os dados do formulário
+  const data = {
+    Nome: document.getElementById('nome').value || 'Anônimo',
+    Unidade: document.getElementById('unidade').value,
+    Area: document.querySelector('input[name="area"]:checked')?.value || 'Não informado',
+    'Tipo de Problema': document.querySelector('input[name="tipo_prob"]:checked')?.value || 'Não informado',
+    'Descrição do Problema': document.getElementById('descProblema').value,
+    'Frequência': document.getElementById('freq').value || 'Não informada',
+    'Impacto': document.querySelector('input[name="impacto"]:checked')?.value || 'Não informado',
+    'Solução Sugerida': document.getElementById('solucao').value,
+    'Tentativas Anteriores': document.getElementById('tentativas').value || 'Nenhuma',
+    'Quem é afetado': Array.from(document.querySelectorAll('input[name="afetados"]:checked')).map(cb => cb.value).join(', ') || 'Ninguém',
+    'Quer participar da solução?': document.querySelector('input[name="participar"]:checked')?.value || 'Não',
+    'E-mail para contato': document.getElementById('email').value || 'Não informado',
+    'Mensagem Final': document.getElementById('mensagemFinal').value || 'Nenhuma',
+    'Avaliação da TI': document.getElementById('aval').value || 'Não informada'
+  };
+
+  try {
+    const response = await fetch(`https://formsubmit.co/ajax/${EMAIL_DESTINO}`, {
+      method: "POST",
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+
+    if (response.ok) {
+      document.getElementById('sec4').classList.remove('active');
+      document.getElementById('progressFill').style.width = '100%';
+      document.getElementById('progressText').textContent = '✅ Concluído!';
+      document.getElementById('successScreen').classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      localStorage.removeItem('formVozDraft');
+    } else {
+      throw new Error('Falha no servidor ao enviar o formulário.');
+    }
+  } catch (error) {
+    console.error("Erro no envio:", error);
+    alert("Ops! Ocorreu um erro ao enviar sua contribuição. Por favor, verifique sua conexão e tente novamente.");
+    btnSubmit.disabled = false;
+    btnSubmit.innerHTML = originalText;
+  }
 }
 
 // Funções para salvar e carregar rascunho (draft)
