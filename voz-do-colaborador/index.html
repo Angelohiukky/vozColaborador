@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voz do Colaborador — TI</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">🏥 TI — Inovação Colaborativa</div>
+  <h1>A sua ideia pode mudar<br><em>a realidade de toda a equipe</em></h1>
+  <p>Você conhece melhor do que ninguém os desafios do dia a dia. Compartilhe o que você vê e o que imagina — e ajude a TI a construir as melhores soluções.</p>
+  <div class="hero-icons">
+    <div class="hero-icon-item">
+      <div class="icon-circle">🔍</div>
+      Identifique
+    </div>
+    <div class="hero-icon-item">
+      <div class="icon-circle">💡</div>
+      Proponha
+    </div>
+    <div class="hero-icon-item">
+      <div class="icon-circle">🚀</div>
+      Transforme
+    </div>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <div class="progress-card">
+    <span class="progress-label">Progresso</span>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progressFill"></div>
+    </div>
+    <span class="progress-steps" id="progressText">Etapa 1 de 4</span>
+  </div>
+</div>
+
+<!-- FORM -->
+<div class="form-wrapper">
+
+  <!-- SEÇÃO 1: Identificação -->
+  <div class="form-section active" id="sec1">
+    <div class="section-header">
+      <div class="section-number">1</div>
+      <div class="section-title">
+        <h2>Quem é você na equipe?</h2>
+        <p>Nos conte um pouco sobre o seu contexto para entendermos melhor sua perspectiva.</p>
+      </div>
+    </div>
+
+    <div class="anon-badge">🔒 Identificação opcional — você pode responder anonimamente</div>
+
+    <div class="field-group">
+      <label>Nome <span class="opcional">(opcional)</span></label>
+      <input type="text" id="nome" placeholder="Seu nome ou apelido…">
+    </div>
+
+    <div class="field-group">
+      <label>Unidade / Local de trabalho <span class="obrig">*</span></label>
+      <select id="unidade">
+        <option value="">Selecione sua unidade…</option>
+        <option>Policlínica Piquet Carneiro</option>
+        <option>Policlínica Newton Bethlem</option>
+        <option>Policlínica Rodolpho Rocco</option>
+        <option>CER II — Centro de Reabilitação</option>
+        <option>Hospital Estadual Rocha Faria</option>
+        <option>Hospital Estadual Anchieta</option>
+        <option>Hospital Estadual Carlos Chagas</option>
+        <option>Hospital Estadual Getúlio Vargas</option>
+        <option>UPA — Unidade de Pronto Atendimento</option>
+        <option>Sede Administrativa</option>
+        <option>Outra unidade</option>
+      </select>
+      <div class="field-error">Por favor, selecione sua unidade.</div>
+    </div>
+
+    <div class="field-group">
+      <label>Área de atuação <span class="obrig">*</span></label>
+      <div class="card-options">
+        <div class="card-option">
+          <input type="radio" name="area" id="area1" value="Assistência direta ao paciente">
+          <label for="area1"><span class="card-icon">🩺</span> Assistência ao Paciente</label>
+        </div>
+        <div class="card-option">
+          <input type="radio" name="area" id="area2" value="Administrativo">
+          <label for="area2"><span class="card-icon">📋</span> Administrativo</label>
+        </div>
+        <div class="card-option">
+          <input type="radio" name="area" id="area3" value="Farmácia / Almoxarifado">
+          <label for="area3"><span class="card-icon">💊</span> Farmácia / Almox.</label>
+        </div>
+        <div class="card-option">
+          <input type="radio" name="area" id="area4" value="Recepção / Faturamento">
+          <label for="area4"><span class="card-icon">🖥️</span> Recepção / Faturamento</label>
+        </div>
+        <div class="card-option">
+          <input type="radio" name="area" id="area5" value="Gestão / Coordenação">
+          <label for="area5"><span class="card-icon">📊</span> Gestão / Coordenação</label>
+        </div>
+        <div class="card-option">
+          <input type="radio" name="area" id="area6" value="Outra">
+          <label for="area6"><span class="card-icon">🔧</span> Outra área</label>
+        </div>
+      </div>
+      <div class="field-error">Selecione sua área de atuação.</div>
+    </div>
+
+    <div class="nav-buttons">
+      <button class="btn-next" onclick="goTo(2)">Próximo passo →</button>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 2: O Problema -->
+  <div class="form-section" id="sec2">
+    <div class="section-header">
+      <div class="section-number">2</div>
+      <div class="section-title">
+        <h2>O que está travando o seu trabalho?</h2>
+        <p>Descreva os obstáculos tecnológicos que você enfrenta. Quanto mais detalhe, melhor!</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>💡 Dica:</strong> Pense no seu último dia de trabalho. O que te fez perder tempo? O que te causou frustração com algum sistema, equipamento ou processo?
+    </div>
+
+    <div class="field-group">
+      <label>Qual é o principal problema de TI que você enfrenta? <span class="obrig">*</span></label>
+      <div class="card-options" style="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));">
+        <div class="card-option">
+          <input type="radio" name="tipo_prob" id="tp1" value="Sistemas lentos ou instáveis">
+          <label for="tp1"><span class="card-icon">🐢</span> Sistemas lentos ou travando</label>
+        </div>
+        <div class="card-option">
+          <input type="radio" name="tipo_prob" id="tp2" value="Equipamentos defeituosos">
+          <label for="tp2"><span class="card-icon">💻</span> Equipamentos com defeito</label>
+        </div>
+        <div class="card-option">
+          <input type="radio" name="tipo_prob" id="tp3" value="Falta de acesso a sistemas">
+          <label for="tp3"><span class="card-icon">🔐</span> Falta de acesso a sistemas</label>
+        </div>
+        <div class="card-option">
+          <input type="radio" name="tipo_prob" id="tp4" value="Retrabalho por processos manuais">
+          <label for="tp4"><span class="card-icon">📄</span> Muito processo manual/papel</label>
+        </div>
+        <div class="card-option">
+          <input type="radio" name="tipo_prob" id="tp5" value="Falta de integração entre sistemas">
+          <label for="tp5"><span class="card-icon">🔗</span> Sistemas não se integram</label>
+        </div>
+        <div class="card-option">
+          <input type="radio" name="tipo_prob" id="tp6" value="Outro">
+          <label for="tp6"><span class="card-icon">➕</span> Outro problema</label>
+        </div>
+      </div>
+      <div class="field-error">Selecione o tipo de problema.</div>
+    </div>
+
+    <div class="field-divider"></div>
+
+    <div class="field-group">
+      <label>Descreva o problema com suas próprias palavras <span class="obrig">*</span></label>
+      <textarea id="descProblema" placeholder="Ex: Toda vez que vou registrar o atendimento no sistema X, ele demora mais de 5 minutos para salvar, o que atrasa a fila e estressa os pacientes…" oninput="countChars(this, 'count1')"></textarea>
+      <div style="display:flex; justify-content:space-between; align-items:center">
+        <p class="field-hint">Seja específico: qual sistema? Qual situação? Com que frequência acontece?</p>
+        <span class="char-counter" id="count1">0 caracteres</span>
+      </div>
+      <div class="field-error">Descreva o problema encontrado.</div>
+    </div>
+
+    <div class="field-group">
+      <label>Com que frequência isso acontece?</label>
+      <div class="star-rating" id="freqRating">
+        <button type="button" class="star-btn" onclick="selectStar('freqRating', this, 'freq')">Raramente</button>
+        <button type="button" class="star-btn" onclick="selectStar('freqRating', this, 'freq')">Às vezes</button>
+        <button type="button" class="star-btn" onclick="selectStar('freqRating', this, 'freq')">Com frequência</button>
+        <button type="button" class="star-btn" onclick="selectStar('freqRating', this, 'freq')">Todo dia</button>
+      </div>
+      <input type="hidden" id="freq" value="">
+    </div>
+
+    <div class="field-group">
+      <label>Qual o impacto no atendimento? <span class="obrig">*</span></label>
+      <div class="impact-select">
+        <div class="impact-opt">
+          <input type="radio" name="impacto" id="imp1" value="1">
+          <label for="imp1"><span class="impact-num">1</span>Mínimo</label>
+        </div>
+        <div class="impact-opt">
+          <input type="radio" name="impacto" id="imp2" value="2">
+          <label for="imp2"><span class="impact-num">2</span>Baixo</label>
+        </div>
+        <div class="impact-opt">
+          <input type="radio" name="impacto" id="imp3" value="3">
+          <label for="imp3"><span class="impact-num">3</span>Médio</label>
+        </div>
+        <div class="impact-opt">
+          <input type="radio" name="impacto" id="imp4" value="4">
+          <label for="imp4"><span class="impact-num">4</span>Alto</label>
+        </div>
+        <div class="impact-opt">
+          <input type="radio" name="impacto" id="imp5" value="5">
+          <label for="imp5"><span class="impact-num">5</span>Crítico</label>
+        </div>
+      </div>
+      <div class="field-error">Avalie o impacto do problema.</div>
+    </div>
+
+    <div class="nav-buttons">
+      <button class="btn-back" onclick="goTo(1)">← Voltar</button>
+      <button class="btn-next" onclick="goTo(3)">Próximo passo →</button>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 3: A Solução -->
+  <div class="form-section" id="sec3">
+    <div class="section-header">
+      <div class="section-number">3</div>
+      <div class="section-title">
+        <h2>O que você faria para resolver?</h2>
+        <p>Não existe ideia errada. Qualquer sugestão, por mais simples que pareça, pode ser o ponto de partida de uma grande melhoria.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>🧠 Imagine:</strong> Se você tivesse acesso a qualquer recurso tecnológico, o que resolveria esse problema de uma vez por todas?
+    </div>
+
+    <div class="field-group">
+      <label>Sua ideia de solução <span class="obrig">*</span></label>
+      <textarea id="solucao" placeholder="Ex: Seria ótimo se o sistema abrisse automaticamente o prontuário do paciente ao ler a pulseira, sem precisar digitar o número manualmente…" oninput="countChars(this, 'count2')" style="min-height:130px"></textarea>
+      <div style="display:flex; justify-content:space-between; align-items:center">
+        <p class="field-hint">Pode ser algo que já existe em outro lugar, que você viu numa reportagem ou simplesmente uma ideia sua!</p>
+        <span class="char-counter" id="count2">0 caracteres</span>
+      </div>
+      <div class="field-error">Descreva sua proposta de solução.</div>
+    </div>
+
+    <div class="field-group">
+      <label>Você já tentou resolver isso de alguma forma?</label>
+      <textarea id="tentativas" placeholder="Ex: A gente criou uma planilha paralela pra compensar, mas é trabalhoso e dá erro…" oninput="countChars(this, 'count3')"></textarea>
+      <span class="char-counter" id="count3">0 caracteres</span>
+    </div>
+
+    <div class="field-group">
+      <label>Quem mais é afetado por esse problema? <span class="opcional">(opcional)</span></label>
+      <div class="card-options">
+        <div class="card-option">
+          <input type="checkbox" name="afetados" id="af1" value="Minha equipe direta">
+          <label for="af1"><span class="card-icon">👥</span> Minha equipe direta</label>
+        </div>
+        <div class="card-option">
+          <input type="checkbox" name="afetados" id="af2" value="Outras equipes">
+          <label for="af2"><span class="card-icon">🏢</span> Outras equipes</label>
+        </div>
+        <div class="card-option">
+          <input type="checkbox" name="afetados" id="af3" value="Pacientes">
+          <label for="af3"><span class="card-icon">🤝</span> Pacientes</label>
+        </div>
+        <div class="card-option">
+          <input type="checkbox" name="afetados" id="af4" value="Toda a unidade">
+          <label for="af4"><span class="card-icon">🏥</span> Toda a unidade</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-buttons">
+      <button class="btn-back" onclick="goTo(2)">← Voltar</button>
+      <button class="btn-next" onclick="goTo(4)">Próximo passo →</button>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 4: Participação e Fechamento -->
+  <div class="form-section" id="sec4">
+    <div class="section-header">
+      <div class="section-number">4</div>
+      <div class="section-title">
+        <h2>Vamos construir isso juntos?</h2>
+        <p>Queremos muito contar com você na hora de testar e validar as soluções!</p>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label>Você toparia participar de um grupo de teste da solução?</label>
+      <div class="card-options">
+        <div class="card-option">
+          <input type="radio" name="participar" id="part1" value="Sim, adoraria participar!">
+          <label for="part1"><span class="card-icon">🙋</span> Sim, adoraria!</label>
+        </div>
+        <div class="card-option">
+          <input type="radio" name="participar" id="part2" value="Sim, se o horário permitir">
+          <label for="part2"><span class="card-icon">🕐</span> Sim, se puder</label>
+        </div>
+        <div class="card-option">
+          <input type="radio" name="participar" id="part3" value="Prefiro só sugerir">
+          <label for="part3"><span class="card-icon">💬</span> Prefiro só sugerir</label>
+        </div>
+        <div class="card-option">
+          <input type="radio" name="participar" id="part4" value="Não por enquanto">
+          <label for="part4"><span class="card-icon">🙏</span> Não por enquanto</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label>E-mail ou ramal para contato <span class="opcional">(opcional)</span></label>
+      <input type="email" id="email" placeholder="seu.email@riosaudeamplificado.rj.gov.br">
+      <p class="field-hint">Somente para retornarmos com novidades sobre sua sugestão. Não será compartilhado.</p>
+    </div>
+
+    <div class="field-divider"></div>
+
+    <div class="field-group">
+      <label>Tem mais alguma coisa que queira nos contar? <span class="opcional">(opcional)</span></label>
+      <textarea id="mensagemFinal" placeholder="Qualquer observação, sugestão adicional ou recado para a equipe de TI…"></textarea>
+    </div>
+
+    <div class="field-group">
+      <label>Como você avalia a abertura da TI para receber sugestões?</label>
+      <div class="star-rating" id="avalRating">
+        <button type="button" class="star-btn" onclick="selectStar('avalRating', this, 'aval')">⭐ Ruim</button>
+        <button type="button" class="star-btn" onclick="selectStar('avalRating', this, 'aval')">⭐⭐ Regular</button>
+        <button type="button" class="star-btn" onclick="selectStar('avalRating', this, 'aval')">⭐⭐⭐ Boa</button>
+        <button type="button" class="star-btn" onclick="selectStar('avalRating', this, 'aval')">⭐⭐⭐⭐ Ótima</button>
+      </div>
+      <input type="hidden" id="aval" value="">
+    </div>
+
+    <div class="nav-buttons">
+      <button class="btn-back" onclick="goTo(3)">← Voltar</button>
+      <button class="btn-submit" onclick="submitForm()">
+        ✅ Enviar minha contribuição
+      </button>
+    </div>
+  </div>
+
+  <!-- TELA DE SUCESSO -->
+  <div class="success-screen" id="successScreen">
+    <div class="success-icon">🚀</div>
+    <h2>Obrigado pela sua voz!</h2>
+    <p>Sua contribuição chegou à equipe de TI. Cada ideia é lida com atenção e pode se tornar a solução que toda a unidade precisava.</p>
+    <div class="success-tags">
+      <span class="success-tag">✅ Resposta registrada</span>
+      <span class="success-tag">🔒 Dados protegidos</span>
+      <span class="success-tag">💡 Ideia em análise</span>
+      <span class="success-tag">🤝 Você fez a diferença</span>
+    </div>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
