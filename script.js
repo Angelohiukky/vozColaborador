@@ -104,9 +104,9 @@ async function submitForm() {
   formData.append('Avaliação da TI', document.getElementById('aval').value || 'Não informada');
 
   try {
-    const response = await fetch(`https://formsubmit.co/ajax/${EMAIL_DESTINO}`, {
+    const response = await fetch(`https://formsubmit.com/ajax/${EMAIL_DESTINO}`, {
       method: "POST",
-      headers: { 
+      headers: {
         'Accept': 'application/json'
       },
       body: formData
@@ -149,7 +149,7 @@ function saveDraft() {
     mensagemFinal: document.getElementById('mensagemFinal').value,
     aval: document.getElementById('aval').value
   };
-  
+
   localStorage.setItem('formVozDraft', JSON.stringify(data));
 }
 
@@ -158,80 +158,80 @@ function loadDraft() {
   if (draft) {
     try {
       const data = JSON.parse(draft);
-      
-      if(data.nome) document.getElementById('nome').value = data.nome;
-      if(data.unidade) document.getElementById('unidade').value = data.unidade;
-      
-      if(data.area) {
+
+      if (data.nome) document.getElementById('nome').value = data.nome;
+      if (data.unidade) document.getElementById('unidade').value = data.unidade;
+
+      if (data.area) {
         const el = document.querySelector(`input[name="area"][value="${data.area}"]`);
-        if(el) el.checked = true;
+        if (el) el.checked = true;
       }
-      
-      if(data.tipo_prob) {
+
+      if (data.tipo_prob) {
         const el = document.querySelector(`input[name="tipo_prob"][value="${data.tipo_prob}"]`);
-        if(el) el.checked = true;
+        if (el) el.checked = true;
       }
-      
-      if(data.descProblema) {
+
+      if (data.descProblema) {
         const descEl = document.getElementById('descProblema');
         descEl.value = data.descProblema;
         countChars(descEl, 'count1');
       }
-      
-      if(data.freq) {
+
+      if (data.freq) {
         document.getElementById('freq').value = data.freq;
         const stars = document.getElementById('freqRating').querySelectorAll('.star-btn');
         stars.forEach(btn => {
-          if(btn.textContent === data.freq) btn.classList.add('selected');
+          if (btn.textContent === data.freq) btn.classList.add('selected');
         });
       }
-      
-      if(data.impacto) {
+
+      if (data.impacto) {
         const el = document.querySelector(`input[name="impacto"][value="${data.impacto}"]`);
-        if(el) el.checked = true;
+        if (el) el.checked = true;
       }
-      
-      if(data.solucao) {
+
+      if (data.solucao) {
         const solEl = document.getElementById('solucao');
         solEl.value = data.solucao;
         countChars(solEl, 'count2');
       }
-      
-      if(data.tentativas) {
+
+      if (data.tentativas) {
         const tenEl = document.getElementById('tentativas');
         tenEl.value = data.tentativas;
         countChars(tenEl, 'count3');
       }
-      
-      if(data.afetados && data.afetados.length > 0) {
+
+      if (data.afetados && data.afetados.length > 0) {
         data.afetados.forEach(val => {
           const el = document.querySelector(`input[name="afetados"][value="${val}"]`);
-          if(el) el.checked = true;
+          if (el) el.checked = true;
         });
       }
-      
-      if(data.participar) {
+
+      if (data.participar) {
         const el = document.querySelector(`input[name="participar"][value="${data.participar}"]`);
-        if(el) el.checked = true;
+        if (el) el.checked = true;
       }
-      
-      if(data.email) document.getElementById('email').value = data.email;
-      if(data.mensagemFinal) document.getElementById('mensagemFinal').value = data.mensagemFinal;
-      
-      if(data.aval) {
+
+      if (data.email) document.getElementById('email').value = data.email;
+      if (data.mensagemFinal) document.getElementById('mensagemFinal').value = data.mensagemFinal;
+
+      if (data.aval) {
         document.getElementById('aval').value = data.aval;
         const stars = document.getElementById('avalRating').querySelectorAll('.star-btn');
         stars.forEach(btn => {
-          if(btn.textContent === data.aval) btn.classList.add('selected');
+          if (btn.textContent === data.aval) btn.classList.add('selected');
         });
       }
-      
-      if(data.currentSection && data.currentSection > 1) {
+
+      if (data.currentSection && data.currentSection > 1) {
         document.getElementById('sec1').classList.remove('active');
         currentSection = data.currentSection;
         document.getElementById('sec' + currentSection).classList.add('active');
       }
-    } catch(e) {
+    } catch (e) {
       console.error("Erro ao carregar o rascunho:", e);
     }
   }
@@ -241,11 +241,11 @@ function loadDraft() {
 window.addEventListener('DOMContentLoaded', () => {
   loadDraft();
   updateProgress();
-  
+
   // Adiciona evento para salvar a cada mudança em qualquer input, select ou textarea
   document.querySelectorAll('input, select, textarea').forEach(el => {
     el.addEventListener('change', saveDraft);
-    if(el.tagName === 'TEXTAREA' || el.type === 'text' || el.type === 'email') {
+    if (el.tagName === 'TEXTAREA' || el.type === 'text' || el.type === 'email') {
       el.addEventListener('input', saveDraft);
     }
   });
