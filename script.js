@@ -23,11 +23,17 @@ function validate(sec) {
   let ok = true;
 
   if (sec === 1) {
-    // Unidade
-    const uni = document.getElementById('unidade');
-    const fg1 = uni.closest('.field-group');
-    if (!uni.value) { fg1.classList.add('has-error'); ok = false; }
-    else fg1.classList.remove('has-error');
+    // Tipo de Unidade
+    const uniTipo = document.getElementById('unidadeTipo');
+    const fgTipo = uniTipo.closest('.field-group');
+    if (!uniTipo.value) { fgTipo.classList.add('has-error'); ok = false; }
+    else fgTipo.classList.remove('has-error');
+
+    // Nome da Unidade
+    const uniNome = document.getElementById('unidadeNome');
+    const fgNome = uniNome.closest('.field-group');
+    if (!uniNome.value.trim()) { fgNome.classList.add('has-error'); ok = false; }
+    else fgNome.classList.remove('has-error');
 
     // Área
     const area = document.querySelector('input[name="area"]:checked');
@@ -90,7 +96,7 @@ async function submitForm() {
   const formData = new FormData();
   formData.append('access_key', WEB3FORMS_ACCESS_KEY);
   formData.append('Nome', document.getElementById('nome').value || 'Anônimo');
-  formData.append('Unidade', document.getElementById('unidade').value);
+  formData.append('Unidade', `${document.getElementById('unidadeTipo').value} — ${document.getElementById('unidadeNome').value}`);
   formData.append('Area', document.querySelector('input[name="area"]:checked')?.value || 'Não informado');
   formData.append('Tipo de Problema', document.querySelector('input[name="tipo_prob"]:checked')?.value || 'Não informado');
   formData.append('Descrição do Problema', document.getElementById('descProblema').value);
@@ -136,7 +142,8 @@ function saveDraft() {
   const data = {
     currentSection: currentSection,
     nome: document.getElementById('nome').value,
-    unidade: document.getElementById('unidade').value,
+    unidadeTipo: document.getElementById('unidadeTipo').value,
+    unidadeNome: document.getElementById('unidadeNome').value,
     area: document.querySelector('input[name="area"]:checked')?.value || '',
     tipo_prob: document.querySelector('input[name="tipo_prob"]:checked')?.value || '',
     descProblema: document.getElementById('descProblema').value,
@@ -161,7 +168,8 @@ function loadDraft() {
       const data = JSON.parse(draft);
 
       if (data.nome) document.getElementById('nome').value = data.nome;
-      if (data.unidade) document.getElementById('unidade').value = data.unidade;
+      if (data.unidadeTipo) document.getElementById('unidadeTipo').value = data.unidadeTipo;
+      if (data.unidadeNome) document.getElementById('unidadeNome').value = data.unidadeNome;
 
       if (data.area) {
         const el = document.querySelector(`input[name="area"][value="${data.area}"]`);
