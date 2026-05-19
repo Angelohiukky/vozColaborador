@@ -1,4 +1,4 @@
-const EMAIL_DESTINO = "angelo.riosaude@gmail.com";
+const WEB3FORMS_ACCESS_KEY = "a4befdaf-675b-4592-bc2e-a59d539368ab";
 
 let currentSection = 1;
 const totalSections = 4;
@@ -88,6 +88,7 @@ async function submitForm() {
 
   // Criar FormData para enviar como multipart/form-data (evita preflight CORS)
   const formData = new FormData();
+  formData.append('access_key', WEB3FORMS_ACCESS_KEY);
   formData.append('Nome', document.getElementById('nome').value || 'Anônimo');
   formData.append('Unidade', document.getElementById('unidade').value);
   formData.append('Area', document.querySelector('input[name="area"]:checked')?.value || 'Não informado');
@@ -104,7 +105,7 @@ async function submitForm() {
   formData.append('Avaliação da TI', document.getElementById('aval').value || 'Não informada');
 
   try {
-    const response = await fetch(`https://formsubmit.com/ajax/${EMAIL_DESTINO}`, {
+    const response = await fetch('https://api.web3forms.com/submit', {
       method: "POST",
       headers: {
         'Accept': 'application/json'

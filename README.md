@@ -9,7 +9,7 @@ Um formulário interativo, dinâmico e moderno construído para dar voz aos cola
 - **Interface em Etapas (Multi-step):** Divisão lógica do formulário em 4 etapas estruturadas para facilitar o preenchimento e evitar fadiga visual.
 - **Barra de Progresso Dinâmica:** Indicador visual de progresso que avança ou retorna conforme as etapas do formulário são navegadas.
 - **Rascunho Automático (`localStorage`):** Proteção total contra perda de dados. Se o colaborador atualizar a página por acidente ou fechar o navegador, o progresso preenchido e a etapa atual são restaurados automaticamente no próximo acesso.
-- **Envio por E-mail Integrado (FormSubmit):** Envio dos feedbacks diretamente para o e-mail da TI (`angelo.riosaude@gmail.com`) via requisições assíncronas (AJAX com Fetch API) e formatado de forma limpa.
+- **Envio por E-mail Integrado (Web3Forms):** Envio dos feedbacks diretamente para o e-mail da TI via API do Web3Forms, usando requisições assíncronas (AJAX com Fetch API) e formatado de forma limpa.
 - **Feedback Visual de Envio:** Desabilita o botão e exibe um indicador de carregamento durante a transmissão do formulário, prevenindo cliques duplos.
 - **Componentes Interativos Premium:** Sistema de avaliação com estrelas (Star Rating), opções em formato de cartões visuais (Card-based selections) e contadores de caracteres para os campos de texto.
 
@@ -29,18 +29,18 @@ ideias/ (raiz do repositório)
 
 ---
 
-## ✉️ Como funciona a Integração com E-mail (FormSubmit)
+## ✉️ Como funciona a Integração com E-mail (Web3Forms)
 
-Usamos o **FormSubmit.co** (um serviço gratuito e rápido para envio de dados de páginas estáticas por e-mail).
+Usamos o **Web3Forms** (um serviço gratuito e estável para envio de dados de páginas estáticas por e-mail).
 
-1. **Configuração:** O e-mail de destino está configurado na constante no início do arquivo `script.js`:
+1. **Configuração:** O token de acesso está configurado na constante no início do arquivo `script.js`:
    ```javascript
-   const EMAIL_DESTINO = "angelo.riosaude@gmail.com";
+   const WEB3FORMS_ACCESS_KEY = "a4befdaf-675b-4592-bc2e-a59d539368ab";
    ```
-2. **Processo de Ativação (Apenas no Primeiro Envio):**
-   - Ao fazer o primeiro teste de envio do formulário, o FormSubmit enviará um e-mail de confirmação para `angelo.riosaude@gmail.com`.
-   - Você precisa entrar no seu e-mail e clicar no link de ativação enviado por eles.
-   - **Pronto!** Uma vez ativado, todos os envios subsequentes cairão diretamente na sua caixa de entrada formatados em uma tabela organizada.
+2. **Funcionamento:**
+   - Ao preencher e enviar o formulário, os dados são enviados diretamente à API do Web3Forms via Fetch.
+   - O e-mail é entregue instantaneamente na caixa de entrada configurada para essa chave (`angelo.riosaude@gmail.com`) sem gerar mensagens de CORS.
+   - O serviço é gratuito para até 250 envios por mês.
 
 ---
 
