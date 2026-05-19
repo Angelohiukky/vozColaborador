@@ -43,11 +43,6 @@ function validate(sec) {
   }
 
   if (sec === 2) {
-    const tipo = document.querySelector('input[name="tipo_prob"]:checked');
-    const tipoFg = document.getElementById('tp1').closest('.card-options').parentElement;
-    if (!tipo) { tipoFg.querySelector('.field-error').style.display = 'block'; ok = false; }
-    else tipoFg.querySelector('.field-error').style.display = 'none';
-
     const desc = document.getElementById('descProblema');
     const fg2 = desc.closest('.field-group');
     if (!desc.value.trim()) { fg2.classList.add('has-error'); ok = false; }
@@ -98,14 +93,12 @@ async function submitForm() {
   formData.append('Nome', document.getElementById('nome').value || 'Anônimo');
   formData.append('Unidade', `${document.getElementById('unidadeTipo').value} — ${document.getElementById('unidadeNome').value}`);
   formData.append('Area', document.querySelector('input[name="area"]:checked')?.value || 'Não informado');
-  formData.append('Tipo de Problema', document.querySelector('input[name="tipo_prob"]:checked')?.value || 'Não informado');
   formData.append('Descrição do Problema', document.getElementById('descProblema').value);
   formData.append('Frequência', document.getElementById('freq').value || 'Não informada');
   formData.append('Impacto', document.querySelector('input[name="impacto"]:checked')?.value || 'Não informado');
   formData.append('Solução Sugerida', document.getElementById('solucao').value);
   formData.append('Tentativas Anteriores', document.getElementById('tentativas').value || 'Nenhuma');
   formData.append('Quem é afetado', Array.from(document.querySelectorAll('input[name="afetados"]:checked')).map(cb => cb.value).join(', ') || 'Ninguém');
-  formData.append('Quer participar da solução?', document.querySelector('input[name="participar"]:checked')?.value || 'Não');
   formData.append('E-mail para contato', document.getElementById('email').value || 'Não informado');
   formData.append('Mensagem Final', document.getElementById('mensagemFinal').value || 'Nenhuma');
   formData.append('Avaliação da TI', document.getElementById('aval').value || 'Não informada');
@@ -145,14 +138,12 @@ function saveDraft() {
     unidadeTipo: document.getElementById('unidadeTipo').value,
     unidadeNome: document.getElementById('unidadeNome').value,
     area: document.querySelector('input[name="area"]:checked')?.value || '',
-    tipo_prob: document.querySelector('input[name="tipo_prob"]:checked')?.value || '',
     descProblema: document.getElementById('descProblema').value,
     freq: document.getElementById('freq').value,
     impacto: document.querySelector('input[name="impacto"]:checked')?.value || '',
     solucao: document.getElementById('solucao').value,
     tentativas: document.getElementById('tentativas').value,
     afetados: Array.from(document.querySelectorAll('input[name="afetados"]:checked')).map(cb => cb.value),
-    participar: document.querySelector('input[name="participar"]:checked')?.value || '',
     email: document.getElementById('email').value,
     mensagemFinal: document.getElementById('mensagemFinal').value,
     aval: document.getElementById('aval').value
@@ -173,11 +164,6 @@ function loadDraft() {
 
       if (data.area) {
         const el = document.querySelector(`input[name="area"][value="${data.area}"]`);
-        if (el) el.checked = true;
-      }
-
-      if (data.tipo_prob) {
-        const el = document.querySelector(`input[name="tipo_prob"][value="${data.tipo_prob}"]`);
         if (el) el.checked = true;
       }
 
@@ -217,11 +203,6 @@ function loadDraft() {
           const el = document.querySelector(`input[name="afetados"][value="${val}"]`);
           if (el) el.checked = true;
         });
-      }
-
-      if (data.participar) {
-        const el = document.querySelector(`input[name="participar"][value="${data.participar}"]`);
-        if (el) el.checked = true;
       }
 
       if (data.email) document.getElementById('email').value = data.email;
