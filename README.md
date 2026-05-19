@@ -20,7 +20,7 @@ Um formulário interativo, dinâmico e moderno construído para dar voz aos cola
 O projeto foi refatorado e modularizado para garantir máxima organização e facilidade de manutenção:
 
 ```text
-vozColaborador/ (raiz do repositório)
+ideias/ (raiz do repositório)
 ├── index.html   # Estrutura e marcação semântica do formulário
 ├── style.css    # Estilos CSS, variáveis de design system e animações
 ├── script.js    # Lógica de validação, rascunhos e envio para API externa
