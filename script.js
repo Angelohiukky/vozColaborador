@@ -86,32 +86,30 @@ async function submitForm() {
   btnSubmit.disabled = true;
   btnSubmit.innerHTML = '⏳ Enviando sua voz...';
 
-  // Obter todos os dados do formulário
-  const data = {
-    Nome: document.getElementById('nome').value || 'Anônimo',
-    Unidade: document.getElementById('unidade').value,
-    Area: document.querySelector('input[name="area"]:checked')?.value || 'Não informado',
-    'Tipo de Problema': document.querySelector('input[name="tipo_prob"]:checked')?.value || 'Não informado',
-    'Descrição do Problema': document.getElementById('descProblema').value,
-    'Frequência': document.getElementById('freq').value || 'Não informada',
-    'Impacto': document.querySelector('input[name="impacto"]:checked')?.value || 'Não informado',
-    'Solução Sugerida': document.getElementById('solucao').value,
-    'Tentativas Anteriores': document.getElementById('tentativas').value || 'Nenhuma',
-    'Quem é afetado': Array.from(document.querySelectorAll('input[name="afetados"]:checked')).map(cb => cb.value).join(', ') || 'Ninguém',
-    'Quer participar da solução?': document.querySelector('input[name="participar"]:checked')?.value || 'Não',
-    'E-mail para contato': document.getElementById('email').value || 'Não informado',
-    'Mensagem Final': document.getElementById('mensagemFinal').value || 'Nenhuma',
-    'Avaliação da TI': document.getElementById('aval').value || 'Não informada'
-  };
+  // Criar FormData para enviar como multipart/form-data (evita preflight CORS)
+  const formData = new FormData();
+  formData.append('Nome', document.getElementById('nome').value || 'Anônimo');
+  formData.append('Unidade', document.getElementById('unidade').value);
+  formData.append('Area', document.querySelector('input[name="area"]:checked')?.value || 'Não informado');
+  formData.append('Tipo de Problema', document.querySelector('input[name="tipo_prob"]:checked')?.value || 'Não informado');
+  formData.append('Descrição do Problema', document.getElementById('descProblema').value);
+  formData.append('Frequência', document.getElementById('freq').value || 'Não informada');
+  formData.append('Impacto', document.querySelector('input[name="impacto"]:checked')?.value || 'Não informado');
+  formData.append('Solução Sugerida', document.getElementById('solucao').value);
+  formData.append('Tentativas Anteriores', document.getElementById('tentativas').value || 'Nenhuma');
+  formData.append('Quem é afetado', Array.from(document.querySelectorAll('input[name="afetados"]:checked')).map(cb => cb.value).join(', ') || 'Ninguém');
+  formData.append('Quer participar da solução?', document.querySelector('input[name="participar"]:checked')?.value || 'Não');
+  formData.append('E-mail para contato', document.getElementById('email').value || 'Não informado');
+  formData.append('Mensagem Final', document.getElementById('mensagemFinal').value || 'Nenhuma');
+  formData.append('Avaliação da TI', document.getElementById('aval').value || 'Não informada');
 
   try {
     const response = await fetch(`https://formsubmit.co/ajax/${EMAIL_DESTINO}`, {
       method: "POST",
       headers: { 
-        'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify(data)
+      body: formData
     });
 
     if (response.ok) {
